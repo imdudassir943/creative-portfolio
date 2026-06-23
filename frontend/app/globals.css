@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 90%;
+    --card: 240 30% 10%;
+    --card-foreground: 0 0% 90%;
+    --popover: 240 30% 10%;
+    --popover-foreground: 0 0% 90%;
+    --primary: 20 93% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 50% 16%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 220 30% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 20 93% 54%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 30% 20%;
+    --input: 220 30% 20%;
+    --ring: 20 93% 54%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-dark-900 text-foreground antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dark-800 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-dark-700;
+  }
+}
+
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent via-accent-light to-neutral;
+  }
+
+  .glass {
+    @apply bg-dark-800/40 backdrop-blur-lg border border-dark-700/50;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px -20px rgba(235, 94, 40, 0.2);
+  }
+
+  .magnetic-button {
+    @apply relative overflow-hidden;
+  }
+
+  .magnetic-button::before {
+    content: '';
+    @apply absolute inset-0 bg-accent/20 scale-x-0 origin-left transition-transform duration-300;
+  }
+
+  .magnetic-button:hover::before {
+    @apply scale-x-100;
+  }
+
+  .reveal-clip {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  }
+
+  .reveal-clip.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .line-through-hover {
+    @apply relative;
+  }
+
+  .line-through-hover::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-[1px] bg-accent transition-all duration-300;
+  }
+
+  .line-through-hover:hover::after {
+    @apply w-full;
+  }
+
+  .blob {
+    @apply absolute rounded-full blur-3xl opacity-30 animate-pulse-glow;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
