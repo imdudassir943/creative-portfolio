@@ -130,7 +130,7 @@ export default function HomePage() {
         />
 
         {/* Developer Portrait Background Layer */}
-        <div className="absolute top-[54%] md:top-auto md:bottom-0 left-[64%] md:left-[66%] -translate-x-1/2 -translate-y-1/2 md:translate-y-4 w-[280px] sm:w-[400px] md:w-[500px] h-[380px] sm:h-[480px] md:h-[550px] z-0 pointer-events-none select-none">
+        <div className="absolute bottom-0 right-0 left-auto translate-x-0 translate-y-0 md:left-[66%] md:right-auto md:-translate-x-1/2 md:translate-y-4 w-[85vw] sm:w-[70vw] md:w-[500px] h-[50vh] sm:h-[60vh] md:h-[550px] z-0 pointer-events-none select-none">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -141,7 +141,7 @@ export default function HomePage() {
               src="/developer.jpg"
               alt="Developer"
               fill
-              className="object-contain md:object-cover md:object-top grayscale contrast-125 brightness-[0.55] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-75"
+              className="object-contain object-right-bottom md:object-cover md:object-top grayscale contrast-125 brightness-[0.55] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-75"
               priority
             />
             {/* Smooth edge fade overlays to blend into black background */}
