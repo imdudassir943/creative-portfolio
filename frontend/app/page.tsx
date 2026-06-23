@@ -131,22 +131,21 @@ export default function HomePage() {
 
         {/* Developer Portrait Background Layer */}
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: 'easeOut', delay: 0.8 }}
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[320px] sm:w-[420px] md:w-[500px] h-[350px] sm:h-[450px] md:h-[550px] z-0 pointer-events-none select-none"
+          initial={{ opacity: 0, scale: 0.9, x: '-50%', y: '-50%' }}
+          animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
+          transition={{ duration: 1.5, ease: 'easeOut', delay: 0.8 }}
+          className="absolute top-[45%] left-1/2 w-[280px] sm:w-[400px] md:w-[500px] h-[380px] sm:h-[480px] md:h-[580px] z-0 pointer-events-none select-none"
         >
           <div className="relative w-full h-full">
             <Image
               src="/developer.jpg"
               alt="Developer"
               fill
-              className="object-cover object-top grayscale contrast-125 brightness-[0.55] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-75"
+              className="object-contain grayscale contrast-125 brightness-[0.55] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-75"
               priority
             />
             {/* Smooth edge fade overlays to blend into black background */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/35" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black" />
           </div>
         </motion.div>
