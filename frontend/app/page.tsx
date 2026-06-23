@@ -130,25 +130,26 @@ export default function HomePage() {
         />
 
         {/* Developer Portrait Background Layer */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, x: '-50%', y: '-50%' }}
-          animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
-          transition={{ duration: 1.5, ease: 'easeOut', delay: 0.8 }}
-          className="absolute top-[45%] left-1/2 w-[280px] sm:w-[400px] md:w-[500px] h-[380px] sm:h-[480px] md:h-[580px] z-0 pointer-events-none select-none"
-        >
-          <div className="relative w-full h-full">
+        <div className="absolute top-[45%] md:top-auto md:bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 md:translate-y-0 w-[280px] sm:w-[400px] md:w-[500px] h-[380px] sm:h-[480px] md:h-[550px] z-0 pointer-events-none select-none">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: 'easeOut', delay: 0.8 }}
+            className="relative w-full h-full"
+          >
             <Image
               src="/developer.jpg"
               alt="Developer"
               fill
-              className="object-contain grayscale contrast-125 brightness-[0.55] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-75"
+              className="object-contain md:object-cover md:object-top grayscale contrast-125 brightness-[0.55] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-75"
               priority
             />
             {/* Smooth edge fade overlays to blend into black background */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/35" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30 md:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/10 md:from-transparent via-transparent to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black" />
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         <motion.div
           className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center"
