@@ -40,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-dark-900`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-dark-900 overflow-x-hidden`}>
         <SmoothScroll>
           <Navigation />
           <main>{children}</main>

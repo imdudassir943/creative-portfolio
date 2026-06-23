@@ -30,6 +30,17 @@ export function Navigation() {
     setIsOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   return (
     <>
       <motion.header
@@ -83,8 +94,8 @@ export function Navigation() {
 
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden relative w-10 h-10 flex items-center justify-center"
-              whileHover={{ scale: 1.1 }}
+              className="md:hidden relative w-12 h-12 flex items-center justify-center z-50 rounded-full border border-dark-800 bg-dark-900/80 backdrop-blur-sm"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <AnimatePresence mode="wait">
@@ -96,7 +107,7 @@ export function Navigation() {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <X className="w-6 h-6 text-white" />
+                    <X className="w-5 h-5 text-white" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -106,7 +117,7 @@ export function Navigation() {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Menu className="w-6 h-6 text-white" />
+                    <Menu className="w-5 h-5 text-white" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -118,22 +129,23 @@ export function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-dark-900/95 backdrop-blur-lg md:hidden"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-40 bg-gradient-to-br from-dark-900/98 via-dark-900/95 to-accent/5 backdrop-blur-2xl md:hidden flex items-center justify-center"
           >
-            <nav className="flex flex-col items-center justify-center h-full gap-8">
+            <nav className="flex flex-col items-center justify-center gap-8 w-full px-6">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: i * 0.1 }}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 50 }}
+                  transition={{ delay: i * 0.08, ease: 'easeOut' }}
+                  className="w-full text-center"
                 >
-                  <Link href={link.href} className="group">
+                  <Link href={link.href} className="group inline-block py-2">
                     <span
                       className={`font-display text-4xl font-bold transition-colors ${
                         pathname === link.href ? 'text-accent' : 'text-white group-hover:text-accent'

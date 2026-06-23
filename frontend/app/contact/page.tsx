@@ -109,7 +109,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-display-lg md:text-display-xl font-bold mb-6"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
           >
             Let&apos;s <span className="text-accent">Connect</span>
           </motion.h1>
@@ -124,9 +124,9 @@ export default function ContactPage() {
         </div>
       </motion.section>
 
-      <section className="py-section">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -134,7 +134,7 @@ export default function ContactPage() {
               transition={{ duration: 0.8 }}
             >
               <div className="mb-12">
-                <h2 className="font-display text-display-sm font-bold mb-4">
+                <h2 className="font-display text-2xl sm:text-3xl lg:text-display-sm font-bold mb-4">
                   Contact Information
                 </h2>
                 <p className="text-neutral">
@@ -236,7 +236,7 @@ export default function ContactPage() {
                           onChange={handleChange}
                           placeholder={field.placeholder}
                           required={field.required}
-                          className="w-full px-4 py-3 rounded-lg bg-dark-900 border border-dark-700 text-white placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors"
+                          className="w-full px-4 py-3 rounded-lg bg-dark-900 border border-dark-700 text-white placeholder:text-muted-foreground focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-all duration-300 shadow-sm focus:shadow-accent/5"
                         />
                       </div>
                     ))}
@@ -256,7 +256,7 @@ export default function ContactPage() {
                         placeholder="Tell me about your project..."
                         required
                         rows={5}
-                        className="w-full px-4 py-3 rounded-lg bg-dark-900 border border-dark-700 text-white placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors resize-none"
+                        className="w-full px-4 py-3 rounded-lg bg-dark-900 border border-dark-700 text-white placeholder:text-muted-foreground focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-all duration-300 shadow-sm focus:shadow-accent/5 resize-none"
                       />
                     </div>
 
@@ -299,7 +299,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-section bg-dark-800/30">
+      <section className="py-16 md:py-24 bg-dark-800/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

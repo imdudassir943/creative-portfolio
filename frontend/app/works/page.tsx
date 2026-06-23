@@ -144,7 +144,7 @@ export default function WorksPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-display-lg md:text-display-xl font-bold mb-6"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
           >
             My <span className="text-accent">Works</span>
           </motion.h1>
@@ -159,20 +159,20 @@ export default function WorksPage() {
         </div>
       </motion.section>
 
-      <section className="py-section">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-3 mb-16"
+            className="flex overflow-x-auto md:flex-wrap md:justify-center gap-3 mb-12 md:mb-16 pb-4 md:pb-0 scrollbar-none snap-x snap-mandatory px-4 md:px-0"
           >
             {categories.map((category) => (
               <motion.button
                 key={category}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
+                className={`snap-center shrink-0 px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
                   category === 'All'
                     ? 'bg-accent text-white'
                     : 'border border-dark-700 text-neutral hover:border-accent hover:text-accent'
@@ -183,7 +183,7 @@ export default function WorksPage() {
             ))}
           </motion.div>
 
-          <div className="works-grid grid md:grid-cols-2 gap-8">
+          <div className="works-grid grid md:grid-cols-2 gap-6 md:gap-8">
             {projects.map((project, index) => (
               <motion.article
                 key={project.id}
@@ -192,7 +192,7 @@ export default function WorksPage() {
                 transition={{ duration: 0.4 }}
               >
                 <Link href={project.liveUrl} className="block">
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[4/5] sm:aspect-[4/3] overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.title}
@@ -269,14 +269,14 @@ export default function WorksPage() {
         </div>
       </section>
 
-      <section className="py-section bg-dark-800/30">
+      <section className="py-16 md:py-24 bg-dark-800/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-display-md font-bold mb-6">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-6">
               Have a Project in Mind?
             </h2>
             <p className="text-neutral text-lg max-w-2xl mx-auto mb-8">

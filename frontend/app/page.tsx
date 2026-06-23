@@ -145,7 +145,7 @@ export default function HomePage() {
 
           <h1
             ref={titleRef}
-            className="font-display text-display-xl md:text-display-lg lg:text-display-xl font-bold mb-6 perspective-1000"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 perspective-1000"
           >
             <span className="inline-block hero-letter">C</span>
             <span className="inline-block hero-letter">r</span>
@@ -213,14 +213,14 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      <section className="reveal-section py-section bg-dark-800/30">
+      <section className="reveal-section py-16 md:py-24 bg-dark-800/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8"
           >
             {[
               { number: '50+', label: 'Projects Completed' },
@@ -243,9 +243,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="reveal-section py-section">
+      <section className="reveal-section py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -253,7 +253,7 @@ export default function HomePage() {
               transition={{ duration: 0.8 }}
             >
               <span className="text-accent font-medium mb-4 block">About Me</span>
-              <h2 className="font-display text-display-md font-bold mb-6">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-6">
                 Turning Ideas Into Reality
               </h2>
               <p className="text-neutral text-lg mb-6 leading-relaxed">
@@ -299,7 +299,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="reveal-section py-section bg-dark-800/30">
+      <section className="reveal-section py-16 md:py-24 bg-dark-800/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -308,12 +308,12 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <span className="text-accent font-medium mb-4 block">Featured Work</span>
-            <h2 className="font-display text-display-md font-bold">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold">
               Selected Projects
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 title: 'E-Commerce Platform',
@@ -338,7 +338,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -10 }}
-                className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer"
+                className="group relative aspect-[4/5] sm:aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer"
               >
                 <Image
                   src={project.image}
@@ -379,7 +379,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="reveal-section py-section relative overflow-hidden">
+      <section className="reveal-section py-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.div
             className="font-display text-[20vw] font-bold text-dark-800 select-none"
@@ -397,7 +397,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 className="font-display text-display-md md:text-display-lg font-bold mb-6">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-display-md lg:text-display-lg font-bold mb-6">
               Ready to Start
               <br />
               <span className="text-accent">Your Project?</span>

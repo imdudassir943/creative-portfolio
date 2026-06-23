@@ -162,7 +162,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-display-lg md:text-display-xl font-bold mb-6"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
           >
             About <span className="text-accent">Me</span>
           </motion.h1>
@@ -177,9 +177,9 @@ export default function AboutPage() {
         </div>
       </motion.section>
 
-      <section className="py-section">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -196,7 +196,7 @@ export default function AboutPage() {
                 />
               </div>
               <motion.div
-                className="absolute -bottom-8 -right-8 p-6 rounded-xl glass"
+                className="absolute -bottom-4 md:-bottom-8 -right-2 md:-right-8 p-4 md:p-6 rounded-xl glass"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -267,7 +267,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-section bg-dark-800/30">
+      <section className="py-16 md:py-24 bg-dark-800/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -275,7 +275,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-display text-display-md font-bold mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-4">
               What I <span className="text-accent">Do</span>
             </h2>
             <p className="text-neutral max-w-2xl mx-auto">
@@ -307,7 +307,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="skills-section py-section">
+      <section className="skills-section py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -315,7 +315,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-display text-display-md font-bold mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-4">
               My <span className="text-accent">Skills</span>
             </h2>
             <p className="text-neutral max-w-2xl mx-auto">
@@ -342,7 +342,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-section bg-dark-800/30">
+      <section className="py-16 md:py-24 bg-dark-800/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -350,7 +350,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-display text-display-md font-bold mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-4">
               My <span className="text-accent">Journey</span>
             </h2>
             <p className="text-neutral max-w-2xl mx-auto">
@@ -358,7 +358,7 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
             <div>
               <h3 className="font-display text-2xl font-bold text-white mb-8 flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-accent" />
