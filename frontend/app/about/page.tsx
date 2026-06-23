@@ -6,6 +6,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { Download, MapPin, Calendar, Code2, Palette, Server, Database, Globe } from 'lucide-react';
+import { ParallaxImage, TextLineReveal, WordReveal } from '@/components/scroll-animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -187,12 +188,10 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-dark-700">
-                <Image
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-dark-700 bg-dark-800">
+                <ParallaxImage
                   src="https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Developer portrait"
-                  fill
-                  className="object-cover"
                 />
               </div>
               <motion.div
@@ -216,7 +215,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="font-display text-display-md font-bold mb-6">
-                Hello, I&apos;m a Creative Developer
+                <WordReveal text="Hello, I'm a Creative Developer" />
               </h2>
               <div className="space-y-4 text-neutral leading-relaxed mb-8">
                 <p>
@@ -276,7 +275,7 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-4">
-              What I <span className="text-accent">Do</span>
+              <WordReveal text="What I Do" />
             </h2>
             <p className="text-neutral max-w-2xl mx-auto">
               Comprehensive services to bring your digital vision to life
@@ -316,7 +315,7 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-4">
-              My <span className="text-accent">Skills</span>
+              <WordReveal text="My Skills" />
             </h2>
             <p className="text-neutral max-w-2xl mx-auto">
               Technologies and tools I work with daily
@@ -351,7 +350,7 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-4">
-              My <span className="text-accent">Journey</span>
+              <WordReveal text="My Journey" />
             </h2>
             <p className="text-neutral max-w-2xl mx-auto">
               Professional experience and education timeline

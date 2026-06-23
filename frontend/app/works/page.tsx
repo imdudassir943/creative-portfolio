@@ -7,6 +7,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, ExternalLink, Github } from 'lucide-react';
 import Image from 'next/image';
+import { ParallaxImage, WordReveal } from '@/components/scroll-animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -193,15 +194,14 @@ export default function WorksPage() {
               >
                 <Link href={project.liveUrl} className="block">
                   <div className="relative aspect-[4/5] sm:aspect-[4/3] overflow-hidden">
-                    <Image
+                    <ParallaxImage
                       src={project.image}
                       alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="transition-transform duration-700 group-hover:scale-125"
                     />
-                    <div className="absolute inset-0 bg-dark-900/60 group-hover:bg-dark-900/40 transition-colors" />
+                    <div className="absolute inset-0 bg-dark-900/60 group-hover:bg-dark-900/40 transition-colors z-10" />
 
-                    <div className="absolute top-4 right-4 flex gap-2">
+                    <div className="absolute top-4 right-4 flex gap-2 z-20">
                       <motion.a
                         href={project.githubUrl}
                         target="_blank"
@@ -226,7 +226,7 @@ export default function WorksPage() {
                       </motion.a>
                     </div>
 
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -255,7 +255,7 @@ export default function WorksPage() {
                     </div>
 
                     <motion.div
-                      className="absolute bottom-6 right-6"
+                      className="absolute bottom-6 right-6 z-20"
                       initial={{ opacity: 0, x: -10 }}
                       whileHover={{ opacity: 1, x: 0 }}
                     >
@@ -277,7 +277,7 @@ export default function WorksPage() {
             viewport={{ once: true }}
           >
             <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-6">
-              Have a Project in Mind?
+              <WordReveal text="Have a Project in Mind?" />
             </h2>
             <p className="text-neutral text-lg max-w-2xl mx-auto mb-8">
               Let&apos;s work together to create something extraordinary.

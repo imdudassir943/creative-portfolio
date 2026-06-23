@@ -2,11 +2,12 @@
 
 import { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowDown, ArrowUpRight, Sparkles } from 'lucide-react';
 import Image from 'next/image';
+import { AnimatedCounter, ParallaxImage, TextLineReveal, WordReveal } from '@/components/scroll-animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,15 +38,12 @@ export default function HomePage() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const { scrollYProgress } = useScroll();
 
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
 
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, -100]);
+  const blob1Y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const blob2Y = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -106,11 +104,6 @@ export default function HomePage() {
 
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-accent origin-left z-50"
-        style={{ scaleX }}
-      />
-
       <section
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
@@ -118,16 +111,24 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20" />
 
         <motion.div
-          className="blob w-96 h-96 bg-accent top-20 -left-20"
-          animate={floatingAnimation}
-        />
+          style={{ y: blob1Y }}
+          className="absolute top-20 -left-20 pointer-events-none select-none z-0"
+        >
+          <motion.div className="blob w-96 h-96 bg-accent" animate={floatingAnimation} />
+        </motion.div>
+        
         <motion.div
-          className="blob w-80 h-80 bg-dark-800 bottom-20 right-10"
-          animate={{
-            ...floatingAnimation,
-            transition: { ...floatingAnimation.transition, delay: 2 },
-          }}
-        />
+          style={{ y: blob2Y }}
+          className="absolute bottom-20 right-10 pointer-events-none select-none z-0"
+        >
+          <motion.div
+            className="blob w-80 h-80 bg-dark-800"
+            animate={{
+              ...floatingAnimation,
+              transition: { ...floatingAnimation.transition, delay: 2 },
+            }}
+          />
+        </motion.div>
 
         {/* Developer Portrait Background Layer */}
         <div className="absolute bottom-0 right-0 left-auto translate-x-0 translate-y-[12%] md:left-[66%] md:right-auto md:-translate-x-1/2 md:translate-y-4 w-[85vw] sm:w-[70vw] md:w-[500px] h-[85vh] sm:h-[60vh] md:h-[550px] z-0 pointer-events-none select-none">
@@ -255,7 +256,7 @@ export default function HomePage() {
                 className="text-center"
               >
                 <div className="font-display text-display-sm md:text-display-md font-bold text-accent">
-                  {stat.number}
+                  <AnimatedCounter value={stat.number} />
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
               </motion.div>
@@ -273,9 +274,9 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-accent font-medium mb-4 block">About Me</span>
+              <TextLineReveal className="text-accent font-medium mb-4 block">About Me</TextLineReveal>
               <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold mb-6">
-                Turning Ideas Into Reality
+                <WordReveal text="Turning Ideas Into Reality" />
               </h2>
               <p className="text-neutral text-lg mb-6 leading-relaxed">
                 I&apos;m a creative developer passionate about building immersive digital experiences.
@@ -298,18 +299,14 @@ export default function HomePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative"
+              className="relative aspect-square rounded-2xl border border-dark-700 bg-dark-800 overflow-hidden"
             >
-              <div className="relative aspect-square rounded-2xl overflow-hidden border border-dark-700 bg-dark-800">
-                <Image
-                  src="https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Developer workspace"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <ParallaxImage
+                src="https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Developer workspace"
+              />
               <motion.div
-                className="absolute -bottom-6 -left-6 w-32 h-32 rounded-xl bg-accent/20 backdrop-blur-lg flex items-center justify-center"
+                className="absolute -bottom-6 -left-6 w-32 h-32 rounded-xl bg-accent/20 backdrop-blur-lg flex items-center justify-center z-10"
                 animate={{ rotate: [0, 5, 0, -5, 0] }}
                 transition={{ duration: 6, repeat: Infinity }}
               >
@@ -328,9 +325,9 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="text-accent font-medium mb-4 block">Featured Work</span>
+            <TextLineReveal className="text-accent font-medium mb-4 block">Featured Work</TextLineReveal>
             <h2 className="font-display text-3xl sm:text-4xl md:text-display-md font-bold">
-              Selected Projects
+              <WordReveal text="Selected Projects" />
             </h2>
           </motion.div>
 
@@ -361,14 +358,13 @@ export default function HomePage() {
                 whileHover={{ y: -10 }}
                 className="group relative aspect-[4/5] sm:aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer"
               >
-                <Image
+                <ParallaxImage
                   src={project.image}
                   alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="transition-transform duration-700 group-hover:scale-125"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-60 group-hover:opacity-90 transition-opacity z-10" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                   <span className="text-xs text-accent font-medium">{project.category}</span>
                   <h3 className="font-display text-xl font-bold text-white mt-2">
                     {project.title}
@@ -419,9 +415,11 @@ export default function HomePage() {
             className="text-center"
           >
             <h2 className="font-display text-4xl sm:text-5xl md:text-display-md lg:text-display-lg font-bold mb-6">
-              Ready to Start
+              <WordReveal text="Ready to Start" />
               <br />
-              <span className="text-accent">Your Project?</span>
+              <span className="text-accent">
+                <WordReveal text="Your Project?" delay={0.4} />
+              </span>
             </h2>
             <p className="text-neutral text-lg max-w-2xl mx-auto mb-12">
               Let&apos;s collaborate and bring your vision to life with stunning design and flawless execution.

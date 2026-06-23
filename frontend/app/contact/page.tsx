@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageSquare } from 'lucide-react';
+import { WordReveal } from '@/components/scroll-animations';
 
 const contactInfo = [
   {
@@ -135,7 +136,7 @@ export default function ContactPage() {
             >
               <div className="mb-12">
                 <h2 className="font-display text-2xl sm:text-3xl lg:text-display-sm font-bold mb-4">
-                  Contact Information
+                  <WordReveal text="Contact Information" />
                 </h2>
                 <p className="text-neutral">
                   Feel free to reach out through any of these channels. I typically respond within 24 hours.
@@ -166,7 +167,7 @@ export default function ContactPage() {
 
               <div>
                 <h3 className="font-display text-lg font-bold text-white mb-4">
-                  Follow Me
+                  <WordReveal text="Follow Me" />
                 </h3>
                 <div className="flex gap-3">
                   {socialLinks.map((link) => (
@@ -198,7 +199,7 @@ export default function ContactPage() {
                     <MessageSquare className="w-5 h-5 text-accent" />
                   </div>
                   <h2 className="font-display text-2xl font-bold text-white">
-                    Send a Message
+                    <WordReveal text="Send a Message" />
                   </h2>
                 </div>
 
@@ -307,14 +308,10 @@ export default function ContactPage() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <div className="font-display text-[15vw] font-bold text-dark-800 select-none leading-none">
-              LET&apos;S BUILD
-            </div>
-            <div className="font-display text-[15vw] font-bold text-dark-800 select-none leading-none -mt-8">
-              SOMETHING
-            </div>
-            <div className="font-display text-[15vw] font-bold text-accent select-none leading-none -mt-8">
-              AMAZING
+            <div className="flex flex-col items-center">
+              <WordReveal text="LET'S BUILD" className="font-display text-[15vw] font-bold text-dark-800 select-none leading-none" />
+              <WordReveal text="SOMETHING" className="font-display text-[15vw] font-bold text-dark-800 select-none leading-none -mt-8" delay={0.2} />
+              <WordReveal text="AMAZING" className="font-display text-[15vw] font-bold text-accent select-none leading-none -mt-8" delay={0.4} />
             </div>
           </motion.div>
         </div>
