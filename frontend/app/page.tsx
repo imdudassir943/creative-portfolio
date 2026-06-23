@@ -135,7 +135,7 @@ export default function HomePage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: 'easeOut', delay: 0.8 }}
-            className="relative w-full h-full"
+            className="relative w-full h-full portrait-mask"
           >
             <Image
               src="/developer.jpg"
@@ -144,11 +144,9 @@ export default function HomePage() {
               className="object-contain object-right-bottom md:object-cover md:object-top grayscale contrast-125 brightness-[0.55] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-75"
               priority
             />
-            {/* Smooth edge fade overlays to blend into black background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black via-black/60 to-transparent md:from-black/10 md:via-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20 md:to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-l from-black/20 via-transparent to-transparent md:from-black/30 z-10" />
+            {/* Blends portrait edges into black internally before container mask fades it */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-black/30 to-transparent md:from-black/10 md:via-transparent z-10" />
           </motion.div>
         </div>
 
