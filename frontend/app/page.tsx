@@ -130,7 +130,7 @@ export default function HomePage() {
         />
 
         {/* Developer Portrait Background Layer */}
-        <div className="absolute top-[50%] md:top-auto md:bottom-0 left-[60%] md:left-[62%] -translate-x-1/2 -translate-y-1/2 md:translate-y-0 w-[280px] sm:w-[400px] md:w-[500px] h-[380px] sm:h-[480px] md:h-[550px] z-0 pointer-events-none select-none">
+        <div className="absolute top-[54%] md:top-auto md:bottom-0 left-[64%] md:left-[66%] -translate-x-1/2 -translate-y-1/2 md:translate-y-4 w-[280px] sm:w-[400px] md:w-[500px] h-[380px] sm:h-[480px] md:h-[550px] z-0 pointer-events-none select-none">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
