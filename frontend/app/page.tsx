@@ -141,7 +141,7 @@ export default function HomePage() {
               src="/developer.jpg"
               alt="Developer"
               fill
-              className="object-cover object-top grayscale contrast-125 brightness-[0.35] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-50"
+              className="object-cover object-top grayscale contrast-125 brightness-[0.55] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-75"
               priority
             />
             {/* Smooth edge fade overlays to blend into black background */}
