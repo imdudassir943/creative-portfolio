@@ -129,6 +129,28 @@ export default function HomePage() {
           }}
         />
 
+        {/* Developer Portrait Background Layer */}
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: 'easeOut', delay: 0.8 }}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[320px] sm:w-[420px] md:w-[500px] h-[350px] sm:h-[450px] md:h-[550px] z-0 pointer-events-none select-none"
+        >
+          <div className="relative w-full h-full">
+            <Image
+              src="/developer.jpg"
+              alt="Developer"
+              fill
+              className="object-cover object-top grayscale contrast-125 brightness-[0.35] sepia-[15%] opacity-40 transition-all duration-700 hover:brightness-50"
+              priority
+            />
+            {/* Smooth edge fade overlays to blend into black background */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black" />
+          </div>
+        </motion.div>
+
         <motion.div
           className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center"
           style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
