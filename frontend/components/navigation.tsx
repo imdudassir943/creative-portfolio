@@ -69,32 +69,43 @@ export function Navigation() {
               />
             </Link>
 
-            <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="relative group">
+            <div className="hidden md:flex items-center gap-6">
+              {navLinks.filter(link => link.href !== '/contact').map((link) => (
+                <Link key={link.href} href={link.href} className="relative px-4 py-2 rounded-full transition-colors group">
+                  {pathname === link.href && (
+                    <motion.span
+                      layoutId="activeNav"
+                      className="absolute inset-0 rounded-full bg-accent/10 border border-accent/20 shadow-[0_0_15px_rgba(235,94,40,0.15)] z-0"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
                   <motion.span
-                    className={`text-sm font-medium transition-colors ${
-                      pathname === link.href ? 'text-accent' : 'text-neutral hover:text-white'
+                    className={`relative z-10 text-sm font-medium transition-colors ${
+                      pathname === link.href ? 'text-accent' : 'text-neutral group-hover:text-white'
                     }`}
-                    whileHover={{ y: -2 }}
-                    transition={{ type: 'spring', stiffness: 400 }}
                   >
                     {link.label}
                   </motion.span>
-                  <motion.span
-                    className={`absolute -bottom-2 left-0 h-0.5 bg-accent ${
-                      pathname === link.href ? 'w-full' : 'w-0'
-                    }`}
-                    whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <span className="absolute inset-0 rounded-full bg-white/5 border border-white/10 opacity-0 group-hover:opacity-100 shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all duration-300 z-0" />
                 </Link>
               ))}
+
+              <Link href="/contact" className="ml-2">
+                <motion.button
+                  className="relative px-6 py-2.5 rounded-full text-sm font-medium text-white overflow-hidden bg-accent shadow-[0_0_20px_rgba(235,94,40,0.3)] hover:shadow-[0_0_35px_rgba(235,94,40,0.6)] transition-all duration-300 border border-accent/30 group/btn"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="relative z-10">Let&apos;s Talk</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-light opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500 rounded-full" />
+                  <span className="absolute -inset-px rounded-full bg-gradient-to-r from-accent via-accent-light to-accent opacity-50 blur-[2px]" />
+                </motion.button>
+              </Link>
             </div>
 
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden relative w-12 h-12 flex items-center justify-center z-50 rounded-full border border-dark-800 bg-dark-900/80 backdrop-blur-sm"
+              className="md:hidden relative w-12 h-12 flex items-center justify-center z-50 rounded-full border border-dark-800 bg-dark-900/80 backdrop-blur-sm hover:border-accent/50 hover:shadow-[0_0_20px_rgba(235,94,40,0.3)] transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
