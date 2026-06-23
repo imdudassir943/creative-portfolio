@@ -130,7 +130,7 @@ export default function HomePage() {
         />
 
         {/* Developer Portrait Background Layer */}
-        <div className="absolute bottom-0 right-0 left-auto translate-x-0 translate-y-0 md:left-[66%] md:right-auto md:-translate-x-1/2 md:translate-y-4 w-[85vw] sm:w-[70vw] md:w-[500px] h-[50vh] sm:h-[60vh] md:h-[550px] z-0 pointer-events-none select-none">
+        <div className="absolute bottom-0 right-0 left-auto translate-x-0 translate-y-[12%] md:left-[66%] md:right-auto md:-translate-x-1/2 md:translate-y-4 w-[85vw] sm:w-[70vw] md:w-[500px] h-[85vh] sm:h-[60vh] md:h-[550px] z-0 pointer-events-none select-none">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -145,9 +145,10 @@ export default function HomePage() {
               priority
             />
             {/* Smooth edge fade overlays to blend into black background */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30 md:to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/10 md:from-transparent via-transparent to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-black/60 to-transparent md:from-black/10 md:via-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20 md:to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-l from-black/20 via-transparent to-transparent md:from-black/30 z-10" />
           </motion.div>
         </div>
 
@@ -301,7 +302,7 @@ export default function HomePage() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="aspect-square rounded-2xl overflow-hidden border border-dark-700 bg-dark-800">
+              <div className="relative aspect-square rounded-2xl overflow-hidden border border-dark-700 bg-dark-800">
                 <Image
                   src="https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Developer workspace"
