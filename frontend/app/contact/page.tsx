@@ -118,7 +118,7 @@ export default function ContactPage() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 cursor-default select-none flex items-center justify-center gap-x-4"
           >
-            <TextRoll>Let's</TextRoll>
+            <TextRoll>Let&apos;s</TextRoll>
             <span className="text-accent">
               <TextRoll>Connect</TextRoll>
             </span>

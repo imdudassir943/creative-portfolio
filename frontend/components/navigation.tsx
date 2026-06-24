@@ -195,7 +195,7 @@ export function Navigation() {
                   initial="initial"
                 >
                   <span className="relative z-10 flex items-center">
-                    <TextRoll>Let's Talk</TextRoll>
+                    <TextRoll>Let&apos;s Talk</TextRoll>
                   </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-light opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500 rounded-full" />
                   <span className="absolute -inset-px rounded-full bg-gradient-to-r from-accent via-accent-light to-accent opacity-50 blur-[2px]" />
