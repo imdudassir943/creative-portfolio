@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, ExternalLink, Github } from 'lucide-react';
@@ -82,6 +82,154 @@ const projects = [
 ];
 
 const categories = ['All', 'Web Development', 'UI/UX Design', 'App Development', 'Mobile Development', 'Machine Learning', 'Web Design'];
+
+interface Project {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  color: string;
+  tech: string[];
+  liveUrl: string;
+  githubUrl: string;
+}
+
+interface WorksProjectCardProps {
+  project: Project;
+  index: number;
+}
+
+const WorksProjectCard: React.FC<WorksProjectCardProps> = ({ project, index }) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.2 };
+  const glowX = useSpring(mouseX, springConfig);
+  const glowY = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+
+  return (
+    <motion.article
+      className="work-card group relative rounded-2xl overflow-hidden cursor-pointer p-[1.5px] bg-dark-800/40 border border-dark-700/30 shadow-lg"
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.4 }}
+      onMouseMove={handleMouseMove}
+    >
+      {/* Rotating Border Beam: GPU accelerated sharp glowing line orbiting the card edges */}
+      <motion.div
+        className="absolute inset-[-1000%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
+        style={{
+          background: "conic-gradient(from 0deg, transparent 60%, #eb5e28 80%, #f57a4f 90%, transparent 100%)",
+        }}
+        animate={{
+          rotate: [0, 360],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+
+      {/* Inner Card Content: Solid background hides the rotating sheet except at the borders */}
+      <div className="relative w-full h-full rounded-[15px] overflow-hidden bg-dark-900 z-10">
+        <Link href={project.liveUrl} className="block">
+          <div className="relative aspect-[4/5] sm:aspect-[4/3] overflow-hidden">
+            {/* Spotlight Glow Overlay */}
+            <motion.div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20"
+              style={{
+                background: useMotionTemplate`
+                  radial-gradient(
+                    300px circle at ${glowX}px ${glowY}px,
+                    rgba(235, 94, 40, 0.15),
+                    transparent 80%
+                  )
+                `,
+              }}
+            />
+
+            <ParallaxImage
+              src={project.image}
+              alt={project.title}
+              className="transition-transform duration-700 group-hover:scale-125"
+            />
+            
+            {/* Dark gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/45 to-transparent opacity-70 group-hover:opacity-90 transition-opacity z-10" />
+
+            <div className="absolute top-4 right-4 flex gap-2 z-35">
+              <motion.a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-dark-800/80 backdrop-blur-sm flex items-center justify-center hover:bg-accent transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Github className="w-5 h-5 text-white" />
+              </motion.a>
+              <motion.a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-dark-800/80 backdrop-blur-sm flex items-center justify-center hover:bg-accent transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExternalLink className="w-5 h-5 text-white" />
+              </motion.a>
+            </div>
+
+            <div className="absolute bottom-0 left-0 right-0 p-6 z-25">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-accent/20 text-accent mb-3">
+                  {project.category}
+                </span>
+                <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+                  {project.title}
+                </h3>
+                <p className="text-neutral text-sm mb-4 line-clamp-2">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 rounded-full text-xs bg-dark-800/80 text-neutral border border-dark-700/30"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div
+              className="absolute bottom-6 right-6 z-25"
+              initial={{ opacity: 0, x: -10 }}
+              whileHover={{ opacity: 1, x: 0 }}
+            >
+              <ArrowUpRight className="w-8 h-8 text-accent" />
+            </motion.div>
+          </div>
+        </Link>
+      </div>
+    </motion.article>
+  );
+};
 
 export default function WorksPage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -200,84 +348,11 @@ export default function WorksPage() {
 
           <div className="works-grid grid md:grid-cols-2 gap-6 md:gap-8">
             {projects.map((project, index) => (
-              <motion.article
+              <WorksProjectCard
                 key={project.id}
-                className={`work-card group relative rounded-2xl overflow-hidden bg-gradient-to-br ${project.color}`}
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.4 }}
-              >
-                <Link href={project.liveUrl} className="block">
-                  <div className="relative aspect-[4/5] sm:aspect-[4/3] overflow-hidden">
-                    <ParallaxImage
-                      src={project.image}
-                      alt={project.title}
-                      className="transition-transform duration-700 group-hover:scale-125"
-                    />
-                    <div className="absolute inset-0 bg-dark-900/60 group-hover:bg-dark-900/40 transition-colors z-10" />
-
-                    <div className="absolute top-4 right-4 flex gap-2 z-20">
-                      <motion.a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-dark-800/80 backdrop-blur-sm flex items-center justify-center hover:bg-accent transition-colors"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Github className="w-5 h-5 text-white" />
-                      </motion.a>
-                      <motion.a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-dark-800/80 backdrop-blur-sm flex items-center justify-center hover:bg-accent transition-colors"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <ExternalLink className="w-5 h-5 text-white" />
-                      </motion.a>
-                    </div>
-
-                    <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-accent/20 text-accent mb-3">
-                          {project.category}
-                        </span>
-                        <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-neutral text-sm mb-4 line-clamp-2">
-                          {project.description}
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-3 py-1 rounded-full text-xs bg-dark-800/80 text-neutral"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </motion.div>
-                    </div>
-
-                    <motion.div
-                      className="absolute bottom-6 right-6 z-20"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileHover={{ opacity: 1, x: 0 }}
-                    >
-                      <ArrowUpRight className="w-8 h-8 text-accent" />
-                    </motion.div>
-                  </div>
-                </Link>
-              </motion.article>
+                project={project}
+                index={index}
+              />
             ))}
           </div>
         </div>
