@@ -58,6 +58,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
         display: ['var(--font-space)', 'Space Grotesk', 'system-ui', 'sans-serif'],
+        signature: ['var(--font-signature)', 'cursive', 'sans-serif'],
       },
       fontSize: {
         'display-xl': ['8rem', { lineHeight: '0.9', letterSpacing: '-0.02em' }],

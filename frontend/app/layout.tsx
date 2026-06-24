@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Inter, Space_Grotesk, Pinyon_Script } from 'next/font/google';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { SmoothScroll } from '@/components/smooth-scroll';
@@ -15,6 +15,13 @@ const inter = Inter({
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space',
+  display: 'swap',
+});
+
+const pinyonScript = Pinyon_Script({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-signature',
   display: 'swap',
 });
 
@@ -41,7 +48,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-dark-900 overflow-x-hidden`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${pinyonScript.variable} font-sans bg-dark-900 overflow-x-hidden`}>
         <SmoothScroll>
           <Navigation />
           <main>{children}</main>

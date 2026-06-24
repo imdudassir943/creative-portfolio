@@ -116,7 +116,7 @@ export default function HomePage() {
         >
           <motion.div className="blob w-96 h-96 bg-accent" animate={floatingAnimation} />
         </motion.div>
-        
+
         <motion.div
           style={{ y: blob2Y }}
           className="absolute bottom-20 right-10 pointer-events-none select-none z-0"

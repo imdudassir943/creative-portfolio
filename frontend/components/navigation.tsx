@@ -53,20 +53,110 @@ export function Navigation() {
       >
         <nav className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <Link href="/" className="relative group">
+            <Link href="/" className="relative group flex items-center py-2 select-none">
+              {/* Rotating Nebula Ambient Glow (Passive) */}
+              <motion.div
+                className="absolute -inset-x-6 -inset-y-3 bg-gradient-to-tr from-accent/15 via-accent-light/5 to-accent/20 blur-xl rounded-full pointer-events-none -z-10"
+                animate={{
+                  rotate: [0, 360],
+                  scale: [0.95, 1.05, 0.95],
+                  opacity: [0.3, 0.55, 0.3],
+                }}
+                transition={{
+                  rotate: {
+                    duration: 15,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  },
+                  scale: {
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  },
+                  opacity: {
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  },
+                }}
+              />
+
+              {/* Interactive Hover Glow Flare */}
+              <div className="absolute -inset-x-8 -inset-y-4 bg-gradient-to-r from-accent/30 via-accent-light/20 to-accent/10 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 group-hover:scale-115 transition-all duration-500 ease-out pointer-events-none -z-20" />
+
+              {/* Twinkling Magic Sparkle (Passive) */}
               <motion.span
-                className="font-display text-2xl font-bold text-white"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: 'spring', stiffness: 400 }}
+                className="absolute -top-1 -right-2 text-accent-light pointer-events-none"
+                animate={{
+                  scale: [0, 1, 1.25, 1, 0],
+                  rotate: [0, 90, 180, 270, 360],
+                  opacity: [0, 0.85, 1, 0.85, 0],
+                }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  repeatDelay: 3.5,
+                  ease: 'easeInOut',
+                }}
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
+                </svg>
+              </motion.span>
+
+              {/* Premium Connected Signature Text with Passive Shimmer */}
+              <motion.span
+                className="font-signature text-4xl font-semibold bg-clip-text text-transparent bg-[size:200%_100%] flex items-center pr-4 py-1 select-none"
+                style={{
+                  backgroundImage: 'linear-gradient(to right, #ffffff 0%, #f57a4f 25%, #eb5e28 50%, #f57a4f 75%, #ffffff 100%)',
+                }}
+                animate={{
+                  backgroundPosition: ['0% 0%', '-200% 0%'],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+                variants={{
+                  initial: {
+                    y: 0,
+                    scale: 1,
+                    filter: 'drop-shadow(0 0 0px rgba(235, 94, 40, 0))',
+                  },
+                  hover: {
+                    y: [0, -6, 2, 0],
+                    scale: 1.08,
+                    filter: [
+                      'drop-shadow(0 0 0px rgba(235, 94, 40, 0))',
+                      'drop-shadow(0 0 10px rgba(235, 94, 40, 0.8))',
+                      'drop-shadow(0 0 6px rgba(235, 94, 40, 0.5))',
+                    ],
+                    transition: {
+                      y: {
+                        duration: 0.6,
+                        times: [0, 0.4, 0.7, 1],
+                        ease: 'easeInOut',
+                      },
+                      scale: {
+                        type: 'spring',
+                        stiffness: 300,
+                        damping: 15,
+                      },
+                      filter: {
+                        duration: 0.4,
+                      },
+                    },
+                  },
+                }}
+                initial="initial"
+                whileHover="hover"
               >
                 Mudassir
               </motion.span>
-              <motion.span
-                className="absolute -bottom-1 left-0 w-full h-0.5 bg-accent origin-left"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
+
+              {/* Premium Underline Glow */}
+              <span className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent origin-center rounded-full scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-out shadow-[0_0_8px_#eb5e28] group-hover:shadow-[0_0_15px_#eb5e28,0_0_8px_#f57a4f]" />
             </Link>
 
             <div className="hidden md:flex items-center gap-6">
