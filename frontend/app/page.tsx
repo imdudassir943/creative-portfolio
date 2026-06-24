@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowDown, ArrowUpRight, Sparkles } from 'lucide-react';
@@ -32,6 +32,72 @@ const floatingAnimation = {
     repeat: Infinity,
     ease: 'easeInOut' as const,
   },
+};
+
+interface FeaturedProjectCardProps {
+  project: {
+    title: string;
+    category: string;
+    image: string;
+  };
+  i: number;
+}
+
+const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({ project, i }) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.2 };
+  const glowX = useSpring(mouseX, springConfig);
+  const glowY = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: i * 0.1 }}
+      whileHover={{ y: -10 }}
+      onMouseMove={handleMouseMove}
+      className="group relative aspect-[4/5] sm:aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer bg-dark-900 border border-dark-700/50 shadow-lg"
+    >
+      {/* Spotlight Glow Overlay: GPU accelerated gradient following the mouse */}
+      <motion.div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              300px circle at ${glowX}px ${glowY}px,
+              rgba(235, 94, 40, 0.15),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
+      <ParallaxImage
+        src={project.image}
+        alt={project.title}
+        className="transition-transform duration-700 group-hover:scale-125"
+      />
+      
+      {/* Dark gradient overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/45 to-transparent opacity-70 group-hover:opacity-90 transition-opacity z-10" />
+      
+      <div className="absolute bottom-0 left-0 right-0 p-6 z-30">
+        <span className="text-xs text-accent font-medium">{project.category}</span>
+        <h3 className="font-display text-xl font-bold text-white mt-2">
+          {project.title}
+        </h3>
+      </div>
+    </motion.div>
+  );
 };
 
 export default function HomePage() {
@@ -364,28 +430,11 @@ export default function HomePage() {
                 image: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=600',
               },
             ].map((project, i) => (
-              <motion.div
+              <FeaturedProjectCard
                 key={project.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="group relative aspect-[4/5] sm:aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer"
-              >
-                <ParallaxImage
-                  src={project.image}
-                  alt={project.title}
-                  className="transition-transform duration-700 group-hover:scale-125"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-60 group-hover:opacity-90 transition-opacity z-10" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                  <span className="text-xs text-accent font-medium">{project.category}</span>
-                  <h3 className="font-display text-xl font-bold text-white mt-2">
-                    {project.title}
-                  </h3>
-                </div>
-              </motion.div>
+                project={project}
+                i={i}
+              />
             ))}
           </div>
 
