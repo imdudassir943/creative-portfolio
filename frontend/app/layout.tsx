@@ -5,6 +5,7 @@ import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { SmoothScroll } from '@/components/smooth-scroll';
 import { WhatsAppButton } from '@/components/whatsapp-button';
+import { CustomCursor } from '@/components/custom-cursor';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -50,6 +51,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${pinyonScript.variable} font-sans bg-dark-900 overflow-x-hidden`}>
         <SmoothScroll>
+          <CustomCursor />
           <Navigation />
           <main>{children}</main>
           <Footer />
