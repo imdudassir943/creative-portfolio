@@ -309,18 +309,23 @@ export default function HomePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative aspect-square rounded-2xl border border-dark-700 bg-dark-800 overflow-hidden"
+              className="relative w-full aspect-square"
             >
-              <ParallaxImage
-                src="https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Developer workspace"
-              />
+              {/* Image Card Container: Handles clipping and parallax */}
+              <div className="relative w-full h-full rounded-2xl border border-dark-700 bg-dark-800 overflow-hidden">
+                <ParallaxImage
+                  src="https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Developer workspace"
+                />
+              </div>
+
+              {/* Floating Badge: Floats outside the card, free from overflow-hidden */}
               <motion.div
-                className="absolute -bottom-6 -left-6 w-32 h-32 rounded-xl bg-accent/20 backdrop-blur-lg flex items-center justify-center z-10"
+                className="absolute -bottom-4 md:-bottom-6 -left-4 md:-left-6 w-24 h-24 md:w-32 md:h-32 rounded-xl bg-accent/20 backdrop-blur-lg border border-white/10 shadow-[0_20px_50px_rgba(235,94,40,0.3)] flex items-center justify-center z-10"
                 animate={{ rotate: [0, 5, 0, -5, 0] }}
                 transition={{ duration: 6, repeat: Infinity }}
               >
-                <span className="font-display text-4xl font-bold text-accent">5+</span>
+                <span className="font-display text-3xl md:text-4xl font-bold text-accent">5+</span>
               </motion.div>
             </motion.div>
           </div>
