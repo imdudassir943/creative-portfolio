@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { TextRoll } from '@/components/ui/text-roll';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -165,28 +166,37 @@ export function Navigation() {
                   {pathname === link.href && (
                     <motion.span
                       layoutId="activeNav"
-                      className="absolute inset-0 rounded-full bg-accent/10 border border-accent/20 shadow-[0_0_15px_rgba(235,94,40,0.15)] z-0"
+                      className="absolute inset-0 rounded-full bg-accent/10 border border-accent/20 shadow-[0_0_15px_rgba(235, 94, 40, 0.15)] z-0"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
                   <motion.span
-                    className={`relative z-10 text-sm font-medium transition-colors ${
+                    className={`relative z-10 text-sm font-medium transition-colors flex items-center ${
                       pathname === link.href ? 'text-accent' : 'text-neutral group-hover:text-white'
                     }`}
+                    whileHover="hovered"
+                    initial="initial"
                   >
-                    {link.label}
+                    <TextRoll>{link.label}</TextRoll>
                   </motion.span>
-                  <span className="absolute inset-0 rounded-full bg-white/5 border border-white/10 opacity-0 group-hover:opacity-100 shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all duration-300 z-0" />
+                  <span className="absolute inset-0 rounded-full bg-white/5 border border-white/10 opacity-0 group-hover:opacity-100 shadow-[0_0_20px_rgba(255, 255, 255, 0.05)] transition-all duration-300 z-0" />
                 </Link>
               ))}
 
               <Link href="/contact" className="ml-2">
                 <motion.button
-                  className="relative px-6 py-2.5 rounded-full text-sm font-medium text-white overflow-hidden bg-accent shadow-[0_0_20px_rgba(235,94,40,0.3)] hover:shadow-[0_0_35px_rgba(235,94,40,0.6)] transition-all duration-300 border border-accent/30 group/btn"
-                  whileHover={{ scale: 1.05 }}
+                  className="relative px-6 py-2.5 rounded-full text-sm font-medium text-white overflow-hidden bg-accent shadow-[0_0_20px_rgba(235, 94, 40, 0.3)] hover:shadow-[0_0_35px_rgba(235, 94, 40, 0.6)] transition-all duration-300 border border-accent/30 group/btn"
+                  variants={{
+                    initial: { scale: 1 },
+                    hovered: { scale: 1.05 },
+                  }}
+                  whileHover="hovered"
                   whileTap={{ scale: 0.95 }}
+                  initial="initial"
                 >
-                  <span className="relative z-10">Let&apos;s Talk</span>
+                  <span className="relative z-10 flex items-center">
+                    <TextRoll>Let's Talk</TextRoll>
+                  </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-light opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500 rounded-full" />
                   <span className="absolute -inset-px rounded-full bg-gradient-to-r from-accent via-accent-light to-accent opacity-50 blur-[2px]" />
                 </motion.button>
@@ -247,13 +257,15 @@ export function Navigation() {
                   className="w-full text-center"
                 >
                   <Link href={link.href} className="group inline-block py-2">
-                    <span
-                      className={`font-display text-4xl font-bold transition-colors ${
+                    <motion.span
+                      className={`font-display text-4xl font-bold transition-colors block ${
                         pathname === link.href ? 'text-accent' : 'text-white group-hover:text-accent'
                       }`}
+                      whileHover="hovered"
+                      initial="initial"
                     >
-                      {link.label}
-                    </span>
+                      <TextRoll>{link.label}</TextRoll>
+                    </motion.span>
                   </Link>
                 </motion.div>
               ))}

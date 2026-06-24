@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageSquare } from 'lucide-react';
 import { WordReveal } from '@/components/scroll-animations';
+import { TextRoll } from '@/components/ui/text-roll';
 
 const contactInfo = [
   {
@@ -107,12 +108,20 @@ export default function ContactPage() {
             Get in Touch
           </motion.span>
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial="initial"
+            whileHover="hovered"
             animate={{ opacity: 1, y: 0 }}
+            variants={{
+              initial: { opacity: 0, y: 30 },
+              hovered: {},
+            }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 cursor-default select-none flex items-center justify-center gap-x-4"
           >
-            Let&apos;s <span className="text-accent">Connect</span>
+            <TextRoll>Let's</TextRoll>
+            <span className="text-accent">
+              <TextRoll>Connect</TextRoll>
+            </span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -265,8 +274,13 @@ export default function ContactPage() {
                       type="submit"
                       disabled={isSubmitting}
                       className="group w-full px-8 py-4 bg-accent text-white font-medium rounded-lg relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
-                      whileHover={{ scale: 1.02 }}
+                      variants={{
+                        initial: { scale: 1 },
+                        hovered: { scale: 1.02 },
+                      }}
+                      whileHover="hovered"
                       whileTap={{ scale: 0.98 }}
+                      initial="initial"
                     >
                       <span className="relative z-10 flex items-center justify-center gap-2">
                         {isSubmitting ? (
@@ -280,7 +294,7 @@ export default function ContactPage() {
                           </>
                         ) : (
                           <>
-                            Send Message
+                            <TextRoll>Send Message</TextRoll>
                             <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                           </>
                         )}

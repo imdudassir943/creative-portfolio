@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowDown, ArrowUpRight, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import { AnimatedCounter, ParallaxImage, TextLineReveal, WordReveal } from '@/components/scroll-animations';
+import { TextRoll } from '@/components/ui/text-roll';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,15 +49,15 @@ export default function HomePage() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        '.hero-letter',
-        { y: 100, opacity: 0, rotateX: -90 },
+        '.hero-word',
+        { y: 80, opacity: 0, rotateX: -30 },
         {
           y: 0,
           opacity: 1,
           rotateX: 0,
-          stagger: 0.05,
-          duration: 1,
-          ease: 'power4.out',
+          stagger: 0.2,
+          duration: 1.2,
+          ease: 'power3.out',
           delay: 0.5,
         }
       );
@@ -167,28 +168,22 @@ export default function HomePage() {
 
           <h1
             ref={titleRef}
-            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 perspective-1000"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 perspective-1000 select-none flex flex-col items-center"
           >
-            <span className="inline-block hero-letter">C</span>
-            <span className="inline-block hero-letter">r</span>
-            <span className="inline-block hero-letter">e</span>
-            <span className="inline-block hero-letter">a</span>
-            <span className="inline-block hero-letter">t</span>
-            <span className="inline-block hero-letter">i</span>
-            <span className="inline-block hero-letter">v</span>
-            <span className="inline-block hero-letter">e</span>
-            <br />
-            <span className="text-accent">
-              <span className="inline-block hero-letter">D</span>
-              <span className="inline-block hero-letter">e</span>
-              <span className="inline-block hero-letter">v</span>
-              <span className="inline-block hero-letter">e</span>
-              <span className="inline-block hero-letter">l</span>
-              <span className="inline-block hero-letter">o</span>
-              <span className="inline-block hero-letter">p</span>
-              <span className="inline-block hero-letter">e</span>
-              <span className="inline-block hero-letter">r</span>
-            </span>
+            <motion.span
+              className="inline-block hero-word cursor-default"
+              whileHover="hovered"
+              initial="initial"
+            >
+              <TextRoll duration={0.6}>Creative</TextRoll>
+            </motion.span>
+            <motion.span
+              className="inline-block hero-word text-accent cursor-default mt-[-0.26em]"
+              whileHover="hovered"
+              initial="initial"
+            >
+              <TextRoll duration={0.6}>Developer</TextRoll>
+            </motion.span>
           </h1>
 
           <p className="hero-subtitle text-xl md:text-2xl text-neutral max-w-2xl mx-auto mb-12">
@@ -199,11 +194,16 @@ export default function HomePage() {
             <Link href="/works">
               <motion.button
                 className="group px-8 py-4 bg-accent text-white font-medium rounded-full relative overflow-hidden"
-                whileHover={{ scale: 1.05 }}
+                variants={{
+                  initial: { scale: 1 },
+                  hovered: { scale: 1.05 },
+                }}
+                whileHover="hovered"
                 whileTap={{ scale: 0.95 }}
+                initial="initial"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  View Projects
+                  <TextRoll>View Projects</TextRoll>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </span>
                 <motion.div
@@ -217,10 +217,15 @@ export default function HomePage() {
             <Link href="/contact">
               <motion.button
                 className="px-8 py-4 border border-dark-700 text-white font-medium rounded-full hover:border-accent transition-colors"
-                whileHover={{ scale: 1.05 }}
+                variants={{
+                  initial: { scale: 1 },
+                  hovered: { scale: 1.05 },
+                }}
+                whileHover="hovered"
                 whileTap={{ scale: 0.95 }}
+                initial="initial"
               >
-                Get in Touch
+                <TextRoll>Get in Touch</TextRoll>
               </motion.button>
             </Link>
           </div>
@@ -286,9 +291,14 @@ export default function HomePage() {
               <Link href="/about">
                 <motion.span
                   className="inline-flex items-center gap-2 text-accent font-medium line-through-hover"
-                  whileHover={{ x: 5 }}
+                  variants={{
+                    initial: { x: 0 },
+                    hovered: { x: 5 },
+                  }}
+                  whileHover="hovered"
+                  initial="initial"
                 >
-                  Learn more about me
+                  <TextRoll>Learn more about me</TextRoll>
                   <ArrowUpRight className="w-4 h-4" />
                 </motion.span>
               </Link>
@@ -383,11 +393,16 @@ export default function HomePage() {
             <Link href="/works">
               <motion.button
                 className="group px-8 py-4 border border-dark-700 text-white font-medium rounded-full hover:border-accent transition-colors"
-                whileHover={{ scale: 1.05 }}
+                variants={{
+                  initial: { scale: 1 },
+                  hovered: { scale: 1.05 },
+                }}
+                whileHover="hovered"
                 whileTap={{ scale: 0.95 }}
+                initial="initial"
               >
                 <span className="flex items-center gap-2">
-                  View All Projects
+                  <TextRoll>View All Projects</TextRoll>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </span>
               </motion.button>
@@ -427,11 +442,16 @@ export default function HomePage() {
             <Link href="/contact">
               <motion.button
                 className="group px-12 py-5 bg-accent text-white font-medium rounded-full relative overflow-hidden"
-                whileHover={{ scale: 1.05 }}
+                variants={{
+                  initial: { scale: 1 },
+                  hovered: { scale: 1.05 },
+                }}
+                whileHover="hovered"
                 whileTap={{ scale: 0.95 }}
+                initial="initial"
               >
                 <span className="relative z-10 flex items-center gap-2 text-lg">
-                  Start a Conversation
+                  <TextRoll>Start a Conversation</TextRoll>
                   <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </span>
                 <motion.div

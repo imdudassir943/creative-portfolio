@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { Download, MapPin, Calendar, Code2, Palette, Server, Database, Globe } from 'lucide-react';
 import { ParallaxImage, TextLineReveal, WordReveal } from '@/components/scroll-animations';
+import { TextRoll } from '@/components/ui/text-roll';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -160,12 +161,20 @@ export default function AboutPage() {
             Get to Know Me
           </motion.span>
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial="initial"
+            whileHover="hovered"
             animate={{ opacity: 1, y: 0 }}
+            variants={{
+              initial: { opacity: 0, y: 30 },
+              hovered: {},
+            }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 cursor-default select-none flex items-center justify-center gap-x-4"
           >
-            About <span className="text-accent">Me</span>
+            <TextRoll>About</TextRoll>
+            <span className="text-accent">
+              <TextRoll>Me</TextRoll>
+            </span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -247,11 +256,16 @@ export default function AboutPage() {
 
               <motion.button
                 className="group px-6 py-3 bg-accent text-white font-medium rounded-full relative overflow-hidden"
-                whileHover={{ scale: 1.05 }}
+                variants={{
+                  initial: { scale: 1 },
+                  hovered: { scale: 1.05 },
+                }}
+                whileHover="hovered"
                 whileTap={{ scale: 0.95 }}
+                initial="initial"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Download Resume
+                  <TextRoll>Download Resume</TextRoll>
                   <Download className="w-4 h-4" />
                 </span>
                 <motion.div
