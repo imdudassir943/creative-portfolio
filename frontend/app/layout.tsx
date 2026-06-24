@@ -30,6 +30,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.URL || 'http://localhost:3000'),
   title: 'Portfolio | Creative Developer',
   description: 'Award-winning creative developer crafting exceptional digital experiences with cutting-edge technology and stunning design.',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/favicon.ico',
+    apple: '/icon.png',
+  },
   openGraph: {
     title: 'Portfolio | Creative Developer',
     description: 'Award-winning creative developer crafting exceptional digital experiences.',

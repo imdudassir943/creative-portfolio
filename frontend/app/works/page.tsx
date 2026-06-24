@@ -160,7 +160,7 @@ const WorksProjectCard: React.FC<WorksProjectCardProps> = ({ project, index }) =
               alt={project.title}
               className="transition-transform duration-700 group-hover:scale-125"
             />
-            
+
             {/* Dark gradient overlay for text readability */}
             <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/45 to-transparent opacity-70 group-hover:opacity-90 transition-opacity z-10" />
 
@@ -335,11 +335,10 @@ export default function WorksPage() {
                 whileHover="hovered"
                 whileTap={{ scale: 0.95 }}
                 initial="initial"
-                className={`snap-center shrink-0 px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
-                  category === 'All'
+                className={`snap-center shrink-0 px-6 py-2.5 rounded-full text-sm font-medium transition-all ${category === 'All'
                     ? 'bg-accent text-white'
                     : 'border border-dark-700 text-neutral hover:border-accent hover:text-accent'
-                }`}
+                  }`}
               >
                 <TextRoll>{category}</TextRoll>
               </motion.button>
