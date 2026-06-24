@@ -58,45 +58,83 @@ const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({ project, i })
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: i * 0.1 }}
-      whileHover={{ y: -10 }}
-      onMouseMove={handleMouseMove}
-      className="group relative aspect-[4/5] sm:aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer bg-dark-900 border border-dark-700/50 shadow-lg"
-    >
-      {/* Spotlight Glow Overlay: GPU accelerated gradient following the mouse */}
+    <div className="relative group">
+      {/* Rotating Outer Glow Shadow: Creates a blurred shining halo on hover */}
       <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20"
+        className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500 blur-2xl pointer-events-none rounded-2xl z-0"
         style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              300px circle at ${glowX}px ${glowY}px,
-              rgba(235, 94, 40, 0.15),
-              transparent 80%
-            )
-          `,
+          background: "conic-gradient(from 0deg, transparent 50%, #eb5e28 80%, #f57a4f 95%, transparent 100%)",
+        }}
+        animate={{
+          rotate: [0, 360],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "linear",
         }}
       />
 
-      <ParallaxImage
-        src={project.image}
-        alt={project.title}
-        className="transition-transform duration-700 group-hover:scale-125"
-      />
-      
-      {/* Dark gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/45 to-transparent opacity-70 group-hover:opacity-90 transition-opacity z-10" />
-      
-      <div className="absolute bottom-0 left-0 right-0 p-6 z-30">
-        <span className="text-xs text-accent font-medium">{project.category}</span>
-        <h3 className="font-display text-xl font-bold text-white mt-2">
-          {project.title}
-        </h3>
-      </div>
-    </motion.div>
+      {/* Card Container with Border Beam */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.1 }}
+        whileHover={{ y: -10 }}
+        onMouseMove={handleMouseMove}
+        className="relative aspect-[4/5] sm:aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer p-[1.5px] bg-dark-800/40 border border-dark-700/30 shadow-lg z-10"
+      >
+        {/* Rotating Border Beam: GPU accelerated sharp glowing line orbiting the card */}
+        <motion.div
+          className="absolute inset-[-1000%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: "conic-gradient(from 0deg, transparent 60%, #eb5e28 80%, #f57a4f 90%, transparent 100%)",
+          }}
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+
+        {/* Inner Card Content: Solid background hides the rotating sheet except at the borders */}
+        <div className="relative w-full h-full rounded-[15px] overflow-hidden bg-dark-900 flex flex-col justify-end">
+          {/* Spotlight Glow Overlay */}
+          <motion.div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20"
+            style={{
+              background: useMotionTemplate`
+                radial-gradient(
+                  300px circle at ${glowX}px ${glowY}px,
+                  rgba(235, 94, 40, 0.15),
+                  transparent 80%
+                )
+              `,
+            }}
+          />
+
+          <ParallaxImage
+            src={project.image}
+            alt={project.title}
+            className="transition-transform duration-700 group-hover:scale-125"
+          />
+          
+          {/* Dark gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/45 to-transparent opacity-70 group-hover:opacity-90 transition-opacity z-10" />
+          
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-30">
+            <span className="text-xs text-accent font-medium">{project.category}</span>
+            <h3 className="font-display text-xl font-bold text-white mt-2">
+              {project.title}
+            </h3>
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
